@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>推箱子游戏 - Web版</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1><i class="fas fa-boxes"></i> 推箱子游戏</h1>
+            <div class="game-info">
+                <div class="level-selector-container">
+                    <span class="info-label">跳关:</span>
+                    <select id="level-selector" class="level-selector" title="选择要游玩的关卡">
+                    </select>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">关卡:</span>
+                    <span id="current-level">1</span>/<span id="total-levels">10</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">步数:</span>
+                    <span id="steps">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">箱子:</span>
+                    <span id="boxes">0/1</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-main">
+            <div class="game-board-container">
+                <div class="game-board" id="game-board"></div>
+                <div class="controls">
+                    <button id="reset-btn" class="btn"><i class="fas fa-redo"></i> 重置关卡</button>
+                    <button id="prev-btn" class="btn"><i class="fas fa-arrow-left"></i> 上一关</button>
+                    <button id="next-btn" class="btn">下一关 <i class="fas fa-arrow-right"></i></button>
+                    <button id="undo-btn" class="btn"><i class="fas fa-undo"></i> 撤销</button>
+                </div>
+            </div>
+            
+            <div class="game-sidebar">
+                <div class="instructions">
+                    <h2><i class="fas fa-info-circle"></i> 游戏说明</h2>
+                    <ul>
+                        <li>使用 <strong>方向键</strong> 或 <strong>WASD</strong> 移动角色</li>
+                        <li>将所有的箱子推到 <span class="target-cell">目标位置</span></li>
+                        <li>一次只能推一个箱子</li>
+                        <li>箱子不能被拉，只能推</li>
+                        <li>尽量减少步数，挑战最短时间</li>
+                    </ul>
+                </div>
+                
+                <div class="key-controls">
+                    <h2><i class="fas fa-keyboard"></i> 控制按键</h2>
+                    <div class="key-row">
+                        <div class="key" id="key-up">↑</div>
+                    </div>
+                    <div class="key-row">
+                        <div class="key" id="key-left">←</div>
+                        <div class="key" id="key-down">↓</div>
+                        <div class="key" id="key-right">→</div>
+                    </div>
+                    <div class="key-hint">
+                        <p>或使用:W A S D 键</p>
+                        <p>R 键：重置当前关卡</p>
+                        <p>Z 键：撤销上一步</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="game-footer">
+            <p>使用VS Code开发 | 推箱子游戏 | 按R键重置关卡 | 按Z键撤销</p>
+        </footer>
+    </div>
+
+    <div id="win-modal" class="modal">
+        <div class="modal-content">
+            <h2><i class="fas fa-trophy"></i> 恭喜通关!</h2>
+            <p>你完成了关卡 <span id="win-level">1</span>!</p>
+            <div class="win-stats">
+                <p>步数: <span id="win-steps">0</span></p>
+                <p>箱子: <span id="win-boxes">0/0</span></p>
+            </div>
+            <div class="modal-buttons">
+                <button id="next-level-btn" class="btn btn-success">下一关 <i class="fas fa-arrow-right"></i></button>
+                <button id="close-modal-btn" class="btn">继续游戏</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入外部JS文件 -->
+    <script src="levels.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
