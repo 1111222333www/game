@@ -87,15 +87,17 @@ body {
     padding: 25px;
     border-radius: 15px;
     border: 2px solid #3949ab;
-    overflow: auto;
+    overflow: auto; /* 关键：允许滚动 */
     max-width: 100%;
-
-    /* 控制游戏板本身 */
-    max-height: 70vh; /* 限制容器最大高度为屏幕的70% */
+    max-height: 70vh; /* 限制容器高度 */
     display: flex;
     flex-direction: column;
+    /* 手机滚动优化 */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
 }
 
+/* 游戏网格板 */
 .game-board {
     display: grid;
     gap: 0;
@@ -105,13 +107,13 @@ body {
     overflow: hidden;
     margin: 0 auto 25px;
     max-width: 100%;
-
-    /* 1. 移除对网格自身的宽度限制，让它根据内容生成 */
-    width: max-content; 
-    /* 2. 允许网格在容器内水平和垂直滚动 */
+    /* 允许内容超出并滚动 */
+    width: max-content;
     overflow: auto;
-    /* 3. 给网格自身也设置一个最大高度，确保它能在容器内滚动 */
     max-height: 60vh;
+    /* 手机滚动优化 */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
 }
 
 /* ========== 响应式格子尺寸 ========== */
@@ -681,3 +683,4 @@ h2 {
     font-size: 0.9rem;
 
 }
+
