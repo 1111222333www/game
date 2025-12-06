@@ -987,6 +987,62 @@ function validateLevels() {
     }
 }
 
+// ============== 手机触摸控制 ==============
+function initTouchControls() {
+    const gameBoard = document.getElementById('game-board');
+    let touchStartX = 0;
+    let touchStartY = 0;
+    
+    // 记录触摸开始的点
+    gameBoard.addEventListener('touchstart', function(event) {
+        // 阻止触摸时屏幕滚动
+        event.preventDefault();
+        const touch = event.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+    }, { passive: false }); // 必须设置 passive: false 才能使用 preventDefault
+    
+    // 触摸结束时判断滑动方向
+    gameBoard.addEventListener('touchend', function(event) {
+        event.preventDefault();
+        const touch = event.changedTouches[0];
+        const touchEndX = touch.clientX;
+        const touchEndY = touch.clientY;
+        
+        // 计算滑动距离
+        const dx = touchEndX - touchStartX;
+        const dy = touchEndY - touchStartY;
+        
+        // 定义一个最小滑动距离阈值（像素），避免误触
+        const minSwipeDistance = 30;
+        
+        // 判断滑动方向（取绝对值最大的方向）
+        if (Math.abs(dx) > Math.abs(dy)) {
+            // 水平滑动
+            if (Math.abs(dx) > minSwipeDistance) {
+                if (dx > 0) {
+                    movePlayer(1, 0); // 向右滑动
+                } else {
+                    movePlayer(-1, 0); // 向左滑动
+                }
+            }
+        } else {
+            // 垂直滑动
+            if (Math.abs(dy) > minSwipeDistance) {
+                if (dy > 0) {
+                    movePlayer(0, 1); // 向下滑动
+                } else {
+                    movePlayer(0, -1); // 向上滑动
+                }
+            }
+        }
+        
+        // 重置起点
+        touchStartX = 0;
+        touchStartY = 0;
+    }, { passive: false });
+}
+
 // ============== 启动游戏 ==============
 // 页面加载完成后初始化游戏
 document.addEventListener('DOMContentLoaded', () => {
@@ -994,6 +1050,9 @@ document.addEventListener('DOMContentLoaded', () => {
     validateLevels();
     
     initGame();
+
+    // 初始化触摸控制
+    initTouchControls();
     
     // 游戏提示
     setTimeout(() => {
