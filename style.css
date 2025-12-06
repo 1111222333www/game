@@ -89,6 +89,11 @@ body {
     border: 2px solid #3949ab;
     overflow: auto;
     max-width: 100%;
+
+    /* 控制游戏板本身 */
+    max-height: 70vh; /* 限制容器最大高度为屏幕的70% */
+    display: flex;
+    flex-direction: column;
 }
 
 .game-board {
@@ -100,6 +105,13 @@ body {
     overflow: hidden;
     margin: 0 auto 25px;
     max-width: 100%;
+
+    /* 1. 移除对网格自身的宽度限制，让它根据内容生成 */
+    width: max-content; 
+    /* 2. 允许网格在容器内水平和垂直滚动 */
+    overflow: auto;
+    /* 3. 给网格自身也设置一个最大高度，确保它能在容器内滚动 */
+    max-height: 60vh;
 }
 
 /* ========== 响应式格子尺寸 ========== */
@@ -667,4 +679,5 @@ h2 {
     color: #90a4ae;
     margin-top: 5px;
     font-size: 0.9rem;
+
 }
