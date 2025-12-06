@@ -87,14 +87,10 @@ body {
     padding: 25px;
     border-radius: 15px;
     border: 2px solid #3949ab;
-    overflow: auto; /* 关键：允许滚动 */
+    overflow: auto; 
     max-width: 100%;
-    max-height: 70vh; /* 限制容器高度 */
     display: flex;
     flex-direction: column;
-    /* 手机滚动优化 */
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
 }
 
 /* 游戏网格板 */
@@ -104,16 +100,10 @@ body {
     background-color: #263238;
     border: 3px solid #37474f;
     border-radius: 5px;
-    overflow: hidden;
     margin: 0 auto 25px;
     max-width: 100%;
-    /* 允许内容超出并滚动 */
+    /* 让游戏板尺寸由内容（所有格子）决定，允许超出容器 */
     width: max-content;
-    overflow: auto;
-    max-height: 60vh;
-    /* 手机滚动优化 */
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
 }
 
 /* ========== 响应式格子尺寸 ========== */
@@ -683,4 +673,5 @@ h2 {
     font-size: 0.9rem;
 
 }
+
 
